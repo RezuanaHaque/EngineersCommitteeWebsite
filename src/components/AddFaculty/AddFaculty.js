@@ -3,7 +3,6 @@ import CartFacultyName from '../CartFacultyName/CartFacultyName';
 
 
 const AddFaculty = (props) => {
-    // console.log(props)
     const { salary, name } = props;
     let totalSalary = 0;
     // add all the salary 
