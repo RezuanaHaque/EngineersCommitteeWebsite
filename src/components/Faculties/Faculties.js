@@ -4,35 +4,37 @@ import InfoFaculty from '../InfoFaculty/InfoFaculty';
 // import "./Faculties.css"
 const Faculties = () => {
     const [faculties, setFaculties] = useState([]);
-    const [addedFaculty, setAddedFaculty] = useState([]);
+    const [addedFacultySalary, setaddedFacultySalary] = useState([]);
+    const [name, setName] = useState([]);
     useEffect(() => {
         fetch('./faculty.JSON')
             .then(res => res.json())
             .then(data => setFaculties(data));
     }, [])
-    let total = 0;
-    const handleBtn = (salary) => {
-        // // addedFaculty.push(salary);
-        // total += salary;
-        // // console.log(total);
-        const newlist = [...addedFaculty, salary];
-        setAddedFaculty(newlist);
-        const reducer = (faculty, newFaculty) => faculty + faculty;
-        console.log(newlist.reduce(reducer));
-        // console.log(newlist);
+
+    const handleBtn = (salary, nameF) => {
+        const newlist = [...addedFacultySalary, salary];
+        setaddedFacultySalary(newlist);
+        // console.log(addedFacultySalary);
+        const newNameList = [...name, nameF];
+        setName(newNameList);
+        // console.log(newNameList);
 
     }
+
     return (
-        <div className="m-5 d-flex">
-            <div className="faculties-section  d-flex flex-wrap w-75 ">
-                {
-                    faculties.map(faculty => <InfoFaculty key={faculty.address} handleBtn={handleBtn} infofaculty={faculty}></InfoFaculty>)
-                }
+        <div className="row">
+            <div className="faculties-section col-lg-9">
+                <div className="row">
+                    {
+                        faculties.map(faculty => <InfoFaculty key={faculty._id} handleBtn={handleBtn} infofaculty={faculty}></InfoFaculty>)
+                    }
+                </div>
             </div>
 
-            <div className="faculties-container mt-4">
+            <div className="faculties-container mt-4 col-lg-3">
                 {
-                    <AddFaculty></AddFaculty>
+                    <AddFaculty salary={addedFacultySalary} name={name}></AddFaculty>
                 }
             </div>
         </div>
